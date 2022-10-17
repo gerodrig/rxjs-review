@@ -52,9 +52,9 @@ import { zip, of } from 'rxjs';
     getRequest(`${SW_API}/people/1/`).pipe(
         // Use the respective operators here
         //first response
-        // tap( response => console.log(response.species[0]) ),
+        tap( response => console.log(response.species[0]) ),
         //second response
-        switchMap( response => zip(of(response), getRequest(`${SW_API}/species/1`)) ),
+        switchMap( response => zip(of(response), getRequest(response.species[0])) ),
         //process the data
         map( ([character, specie]) => ({character, specie}) )
     //! DO NOT MODIFY THIS PART==
